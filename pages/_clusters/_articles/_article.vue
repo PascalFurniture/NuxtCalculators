@@ -286,10 +286,15 @@
 import clusters from "../../../static/clusters";
 export default {
   layout: "article",
-  // Validate page
+  // Validate page (check if article exists)
+  async validate({ $content, params }) {
+    let articles = await $content("articles", params.slug).fetch();
+    return articles.some((x) => x.slug === params.article);
+  },
+  // Set article data and map to template
   async asyncData({ $content, params }) {
-    let article = await $content("articles", params.slug).fetch();
-    article = article[0];
+    let articles = await $content("articles", params.slug).fetch();
+    const article = articles.find((x) => x.slug === params.article);
     return { article };
   },
   // SEO tags
