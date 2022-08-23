@@ -17,7 +17,12 @@ export default {
   },
   //
   generate: {
-
+    async ready() {
+      const { $content } = require('@nuxt/content')
+      const articles = await $content().only(['slug', 'clusterPath']).fetch()
+      console.log(`${x.clusterPath}/${x.slug}`)
+      return articles.map(x => `${x.clusterPath}/${x.slug}`)
+    }
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
