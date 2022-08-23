@@ -159,7 +159,7 @@
                   <div class="text-rich-text w-richtext">
                     <!--
                       Dynamically injects MarkDown content from
-                      the 'content/articles' directory
+                      the 'content/articles' directory.
                       -->
                     <nuxt-content :document="article" />
                   </div>
