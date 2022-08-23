@@ -18,7 +18,6 @@ export default {
   //
   generate: {
     async ready() {
-      const array = [];
       const { $content } = require('@nuxt/content')
       const articles = await $content().only(['slug', 'clusterPath']).fetch()
       console.log(`${x.clusterPath}/${x.slug}`)
