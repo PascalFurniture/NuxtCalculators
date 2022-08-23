@@ -56,5 +56,6 @@ export default {
     // GEO Location AP
     // DOCS --> https://ipregistry.co/docs
     geoAPI: process.env.BASE_URL || 'https://api.ipregistry.co/?key=uczyw3hmlyrv3val'
-  }
+  },
+  target: 'static'
 }
