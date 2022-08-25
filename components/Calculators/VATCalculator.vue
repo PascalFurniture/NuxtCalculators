@@ -121,6 +121,7 @@
                 ><input
                   v-model.number="inputAmount"
                   type="number"
+                  inputmode="numeric"
                   class="form-input w-input"
                   maxlength="256"
                   :placeholder="`${this.currency ? this.currency : ''} 00.00`"
