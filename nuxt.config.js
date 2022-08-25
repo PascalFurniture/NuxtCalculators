@@ -17,6 +17,7 @@ export default {
   },
   //
   generate: {
+    dir: 'dist',
     async ready() {
       const { $content } = require('@nuxt/content')
       const articles = await $content().only(['slug', 'clusterPath']).fetch()
