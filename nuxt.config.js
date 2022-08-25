@@ -22,7 +22,8 @@ export default {
       const articles = await $content().only(['slug', 'clusterPath']).fetch()
       console.log(`${x.clusterPath}/${x.slug}`)
       return articles.map(x => `${x.clusterPath}/${x.slug}`)
-    }
+    },
+    fallback: '404.html'
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
