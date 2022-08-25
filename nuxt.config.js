@@ -1,3 +1,4 @@
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -21,8 +22,12 @@ export default {
     async ready() {
       const { $content } = require('@nuxt/content')
       const articles = await $content().only(['slug', 'clusterPath']).fetch()
-      console.log(`${x.clusterPath}/${x.slug}`)
-      return articles.map(x => `${x.clusterPath}/${x.slug}`)
+      return articles.map(x => {
+        return {
+          route: `${x.clusterPath}/${x.slug}`,
+          payload: x
+        }
+      })
     },
     fallback: '404.html'
   },
