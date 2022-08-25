@@ -129,11 +129,12 @@
                   id="VAT-Amount"
                   required=""
                   @input="
+                    stringReplace(inputAmount);
                     outputAmount = calculateVAT(
                       inputAmount,
                       vatRate,
                       currentTab === 1 ? true : false
-                    ).toFixed(2)
+                    ).toFixed(2);
                   "
                 />
               </div>
@@ -297,6 +298,10 @@ export default {
     // Copy to clipboard
     copy() {
       navigator.clipboard.writeText(this.outputAmount);
+    },
+    // Fixes issues with decimal keyboards on mobile devices
+    stringReplace(input) {
+      input = input.replace(/,/g, ".");
     },
   },
 };
