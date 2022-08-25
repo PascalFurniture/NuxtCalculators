@@ -301,7 +301,7 @@ export default {
     },
     // Fixes issues with decimal keyboards on mobile devices
     stringReplace(input) {
-      input = input.replace(/,/g, ".");
+      input = input.replace(",", ".");
     },
   },
 };
