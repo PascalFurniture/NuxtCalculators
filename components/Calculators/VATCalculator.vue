@@ -121,6 +121,7 @@
                 ><input
                   v-model.number="inputAmount"
                   type="number"
+                  step=".01"
                   inputmode="numeric"
                   class="form-input w-input"
                   maxlength="256"
