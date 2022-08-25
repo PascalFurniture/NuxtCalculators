@@ -22,12 +22,7 @@ export default {
     async ready() {
       const { $content } = require('@nuxt/content')
       const articles = await $content().only(['slug', 'clusterPath']).fetch()
-      return articles.map(x => {
-        return {
-          route: `${x.clusterPath}/${x.slug}`,
-          payload: x
-        }
-      })
+      return articles.map(x => (`${x.clusterPath}/${x.slug}`))
     },
     fallback: '404.html'
   },
