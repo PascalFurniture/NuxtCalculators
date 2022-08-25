@@ -120,6 +120,7 @@
                   }}</span></label
                 ><input
                   v-model.number="inputAmount"
+                  type="number"
                   class="form-input w-input"
                   maxlength="256"
                   :placeholder="`${this.currency ? this.currency : ''} 00.00`"

@@ -1,4 +1,8 @@
-
+let dynamicRoutes = async () => {
+  const { $content } = require('@nuxt/content')
+  const articles = await $content().only(['slug', 'clusterPath']).fetch()
+  return articles.map(x => `/${x.clusterPath}/${x.slug}`)
+}
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -19,11 +23,7 @@ export default {
   //
   generate: {
     dir: 'dist',
-    async ready() {
-      const { $content } = require('@nuxt/content')
-      const articles = await $content().only(['slug', 'clusterPath']).fetch()
-      return articles.map(x => `${x.clusterPath}/${x.slug}`)
-    },
+    routes: dynamicRoutes,
     fallback: '404.html'
   },
 
@@ -59,5 +59,5 @@ export default {
     // DOCS --> https://ipregistry.co/docs
     geoAPI: process.env.BASE_URL || 'https://api.ipregistry.co/?key=uczyw3hmlyrv3val'
   },
-  target: 'static'
+  target: 'static',
 }

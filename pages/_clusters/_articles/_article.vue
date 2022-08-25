@@ -291,9 +291,14 @@ export default {
     let articles = await $content("articles", params.slug).fetch();
     return articles.some((x) => x.slug === params.article);
   },
+  data() {
+    return {
+      cluster: null,
+    };
+  },
   // Set article data and map to template
   async asyncData({ $content, params }) {
-    let articles = await $content("articles", params.slug).fetch();
+    const articles = await $content("articles", params.slug).fetch();
     const article = articles.find((x) => x.slug === params.article);
     return { article };
   },
@@ -312,10 +317,10 @@ export default {
       ],
     };
   },
-  computed: {
-    cluster() {
-      return clusters.find((el) => el.path === this.$route.params.clusters);
-    },
+  mounted() {
+    this.cluster = clusters.find(
+      (el) => el.path === this.$route.path.split("/")[1]
+    );
   },
 };
 </script>
