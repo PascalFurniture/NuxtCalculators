@@ -120,7 +120,7 @@
                   }}</span></label
                 ><input
                   v-model.number="inputAmount"
-                  type="number"
+                  type="text"
                   step=".01"
                   inputmode="decimal"
                   class="form-input w-input"
