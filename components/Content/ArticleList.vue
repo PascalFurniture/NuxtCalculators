@@ -28,8 +28,8 @@
                   :key="i"
                   class="articles_item"
                   :to="{
-                    name: 'clusters-articles-article',
-                    params: { clusters: cluster.path, article: el.slug },
+                    name: 'cluster-article',
+                    params: { cluster: cluster.path, article: el.slug },
                   }"
                 >
                   <div class="articles_item-content">
@@ -85,32 +85,6 @@
 <script>
 export default {
   name: "ArticleList",
-  props: ["cluster"],
-  data() {
-    return {
-      articles: [
-        {
-          title: "10 Basic VAT Tips You Should Know",
-          description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim...`,
-          slug: "10-basic-vat-tips",
-        },
-        {
-          title: "10 Basic VAT Tips You Should Know",
-          description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim...`,
-          slug: "blog-template",
-        },
-        {
-          title: "10 Basic VAT Tips You Should Know",
-          description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim...`,
-          slug: "blog-template",
-        },
-        {
-          title: "10 Basic VAT Tips You Should Know",
-          description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim...`,
-          slug: "blog-template",
-        },
-      ],
-    };
-  },
+  props: ["cluster", "articles"],
 };
 </script>

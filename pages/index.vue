@@ -3,8 +3,8 @@
     <div v-for="el in clusters" :key="el.clusterId">
       <nuxt-link
         :to="{
-          name: 'clusters-cluster',
-          params: { clusters: el.path, data: el },
+          name: 'cluster',
+          params: { cluster: el.path, data: el },
         }"
         >{{ el.name }}</nuxt-link
       >

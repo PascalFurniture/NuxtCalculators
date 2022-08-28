@@ -4,7 +4,7 @@
     <div class="page-wrapper">
       <div class="global-styles w-embed"></div>
       <main class="main-wrapper">
-        <CalculatorWrapper :cluster="cluster" />
+        <CalculatorWrapper :cluster="cluster" :articles="articles" />
       </main>
     </div>
   </div>
@@ -17,6 +17,15 @@ export default {
     CalculatorWrapper: () =>
       import("../../components/Wrappers/CalculatorWrapper.vue"),
   },
+  async asyncData({ $content, route }) {
+    const cluster = clusters.find((x) => `/${x.path}` === route.path);
+    const articles = await $content("articles")
+      .where({ clusterPath: { $eq: cluster.path } })
+      .without(["body"])
+      .limit(4)
+      .fetch();
+    return { cluster, articles };
+  },
   head() {
     return {
       title: this.title,
@@ -28,17 +37,6 @@ export default {
         },
       ],
     };
-  },
-  computed: {
-    cluster() {
-      /*
-      If the user lands directly on the page without following a link
-      we need to pull the "Cluster" data from the JS file
-      */
-      return this.$route.params.data
-        ? this.$route.params.data
-        : clusters.find((x) => `/${x.path}` === this.$route.path);
-    },
   },
 };
 </script>

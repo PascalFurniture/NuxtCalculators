@@ -56,8 +56,8 @@
                   <div class="post_breadcrumb hide-mobile-portrait">
                     <nuxt-link
                       :to="{
-                        name: 'clusters-cluster',
-                        params: { clusters: cluster.path, data: cluster },
+                        name: 'cluster',
+                        params: { cluster: cluster.path },
                       }"
                       class="breadcrumb-link w-inline-block"
                     >
@@ -248,7 +248,6 @@
           </div>
         </div>
       </header>
-      <!--Tool Plug-->
       <section class="section-cta">
         <div class="page-padding">
           <div class="container-small">
@@ -266,8 +265,8 @@
                   <div class="button-row is-one-button">
                     <nuxt-link
                       :to="{
-                        name: 'clusters-cluster',
-                        params: { clusters: cluster.path, cluster: el },
+                        name: 'cluster',
+                        params: { cluster: cluster.path },
                       }"
                       class="button is-dark w-button"
                       >Try the {{ cluster.name }} Calculator</nuxt-link
@@ -291,16 +290,14 @@ export default {
     let articles = await $content("articles", params.slug).fetch();
     return articles.some((x) => x.slug === params.article);
   },
-  data() {
-    return {
-      cluster: null,
-    };
-  },
   // Set article data and map to template
-  async asyncData({ $content, params }) {
-    const articles = await $content("articles", params.slug).fetch();
+  async asyncData({ $content, params, route }) {
+    const [cluster, articles] = await Promise.all([
+      clusters.find((el) => el.path === route.path.split("/")[1]),
+      $content("articles", params.slug).fetch(),
+    ]);
     const article = articles.find((x) => x.slug === params.article);
-    return { article };
+    return { cluster, article };
   },
   // SEO tags
   head() {
@@ -316,11 +313,6 @@ export default {
         },
       ],
     };
-  },
-  mounted() {
-    this.cluster = clusters.find(
-      (el) => el.path === this.$route.path.split("/")[1]
-    );
   },
 };
 </script>

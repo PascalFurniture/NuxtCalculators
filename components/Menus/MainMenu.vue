@@ -23,8 +23,8 @@ export default {
         {
           name: `${this.cluster.name} Calculator`,
           to: {
-            name: "clusters-cluster",
-            params: { clusters: this.cluster.path, data: this.cluster },
+            name: "cluster",
+            params: { cluster: this.cluster.path, data: this.cluster },
           },
         },
         {

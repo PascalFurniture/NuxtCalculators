@@ -129,12 +129,11 @@
                   id="VAT-Amount"
                   required=""
                   @input="
-                    stringReplace(inputAmount);
                     outputAmount = calculateVAT(
                       inputAmount,
                       vatRate,
                       currentTab === 1 ? true : false
-                    ).toFixed(2);
+                    ).toFixed(2)
                   "
                 />
               </div>
@@ -289,9 +288,13 @@ export default {
   },
   async created() {
     // Call geolocation service
-    const response = await fetch(process.env.geoAPI);
-    this.geoData = await response.json();
-    this.currency = this.geoData.currency.symbol_native;
+    try {
+      const response = await fetch(process.env.geoAPI);
+      this.geoData = await response.json();
+      this.currency = this.geoData.currency.symbol_native;
+    } catch (error) {
+      return new Error(error);
+    }
   },
   methods: {
     calculateVAT,

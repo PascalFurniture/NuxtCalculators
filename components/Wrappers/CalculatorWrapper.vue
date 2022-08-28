@@ -6,8 +6,8 @@
           <div class="padding-vertical padding-huge is-header">
             <div class="margin-bottom margin-xxlarge">
               <div class="max-width-large text-align-center is-flex-col">
-                <MainMenu :cluster="cluster" />
-                <ToolHeader :cluster="cluster" />
+                <MainMenu v-if="cluster" :cluster="cluster" />
+                <ToolHeader v-if="cluster" :cluster="cluster" />
               </div>
             </div>
             <component :is="currentComponent" />
@@ -16,13 +16,13 @@
       </div>
     </section>
     <ExplanationBox id="how-it-works" />
-    <ArticleList id="articles" :cluster="cluster" />
+    <ArticleList id="articles" :cluster="cluster" :articles="articles" />
   </div>
 </template>
 <script>
 export default {
   name: "CalculatorWrapper",
-  props: ["cluster"],
+  props: ["cluster", "articles"],
   components: {
     MainMenu: () => import("../Menus/MainMenu.vue"),
     ToolHeader: () => import("../Headers/ToolHeader.vue"),
